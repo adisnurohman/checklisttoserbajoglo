@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checklist Konsinyasi Arafa Hijab</title>
+<style>
+:root {
+  --site-primary: #244c3c;
+  --site-on-primary: #ffffff;
+  --site-secondary: #e9efe9;
+  --site-on-secondary: #244c3c;
+  --site-background: #f5f7f3;
+  --site-on-background: #202923;
+  --site-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  --surface: light-dark(#ffffff, #1c2420);
+  --surface-soft: light-dark(#f8faf7, #242e28);
+  --text: light-dark(#202923, #edf2ed);
+  --muted: light-dark(#6c786f, #aab7ad);
+  --border: light-dark(#e1e8e1, #39463e);
+  --green: #39795b;
+  --green-soft: light-dark(#e7f3eb, #263e30);
+  --amber: #a66b23;
+  --amber-soft: light-dark(#fbf1df, #403322);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--site-background); color: var(--site-on-background); font-family: var(--site-font-body); }
+button, input { font: inherit; }
+.app { min-height: 100vh; width: 100%; background-color: var(--site-background); color: var(--text); border-radius: 0; }
+.hero { background: var(--site-primary); color: var(--site-on-primary); padding: calc(34px * var(--site-spacing-scale)) max(22px, calc((100vw - 1120px)/2)); position: relative; overflow: hidden; }
+.hero:after { content:""; position:absolute; width:300px; height:300px; border:1px solid rgba(255,255,255,.16); border-radius:50%; right:8%; top:-190px; box-shadow:0 0 0 34px rgba(255,255,255,.035),0 0 0 70px rgba(255,255,255,.025); opacity:var(--site-decoration-opacity); pointer-events:none; }
+.eyebrow { text-transform:uppercase; letter-spacing:.14em; font-size:11px; font-weight:750; opacity:.78; }
+h1 { font-family:var(--site-font-heading); font-size:calc(32px * var(--site-heading-scale)); line-height:1.13; letter-spacing:-.04em; margin:10px 0 8px; max-width:650px; }
+.hero p { margin:0; opacity:.84; font-size:14px; }
+.hero-meta { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.pill { display:inline-flex; align-items:center; gap:7px; border:1px solid rgba(255,255,255,.25); background:rgba(255,255,255,.09); border-radius:999px; padding:7px 11px; font-size:12px; }
+main { max-width:1120px; margin:0 auto; padding:24px 22px 54px; }
+.summary { display:grid; grid-template-columns:1.4fr repeat(2,1fr); gap:12px; margin-top:-2px; }
+.panel, .category, .toolbar { background:var(--surface); border:1px solid var(--border); border-radius:calc(16px * var(--site-radius-scale)); }
+.panel { padding:18px; }
+.progress-panel { grid-row:span 1; }
+.metric-label { color:var(--muted); font-size:12px; font-weight:650; }
+.big-number { font-size:30px; font-weight:780; letter-spacing:-.05em; margin:5px 0 10px; }
+.track { height:9px; background:var(--site-secondary); border-radius:99px; overflow:hidden; }
+.fill { height:100%; width:0%; background:var(--green); border-radius:99px; transition:width .2s ease; }
+.progress-foot { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:11px; margin-top:9px; }
+.metric-value { font-size:27px; font-weight:760; letter-spacing:-.04em; margin-top:7px; }
+.metric-sub { font-size:11px; color:var(--muted); margin-top:3px; }
+.toolbar { margin:18px 0 14px; padding:12px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.search { flex:1 1 210px; min-width:170px; border:1px solid var(--border); border-radius:10px; background:var(--surface-soft); color:var(--text); padding:10px 12px; outline:none; }
+.search:focus { border-color:var(--green); }
+.filters { display:flex; gap:5px; padding:4px; border-radius:11px; background:var(--surface-soft); }
+.filter { border:0; background:transparent; color:var(--muted); padding:7px 10px; border-radius:8px; cursor:pointer; font-size:12px; }
+.filter.active { background:var(--surface); color:var(--text); box-shadow:0 1px 3px rgba(0,0,0,.09); font-weight:700; }
+.action { border:1px solid var(--border); color:var(--text); background:var(--surface); border-radius:10px; padding:9px 12px; cursor:pointer; font-size:12px; font-weight:650; }
+.action:hover { background:var(--surface-soft); }
+.section-heading { display:flex; justify-content:space-between; align-items:end; gap:12px; margin:26px 2px 12px; }
+.section-heading h2 { font-size:17px; margin:0; letter-spacing:-.02em; }
+.section-heading span { color:var(--muted); font-size:12px; }
+.categories { display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:start; }
+.category { overflow:hidden; }
+.category-head { display:flex; align-items:center; gap:11px; padding:15px 16px; border-bottom:1px solid var(--border); }
+.cat-icon { width:34px; height:34px; display:grid; place-items:center; border-radius:11px; background:var(--green-soft); color:var(--green); font-size:16px; flex:none; }
+.cat-title { font-size:13px; font-weight:760; flex:1; }
+.cat-count { color:var(--muted); font-size:11px; font-variant-numeric:tabular-nums; }
+.cat-track { height:3px; background:var(--site-secondary); }
+.cat-track > div { height:100%; background:var(--green); width:0%; transition:width .2s; }
+.items { padding:5px 15px 10px; }
+.task { display:flex; gap:10px; align-items:flex-start; padding:10px 1px; border-bottom:1px solid var(--border); cursor:pointer; }
+.task:last-child { border-bottom:0; }
+.task input { appearance:none; width:17px; height:17px; border:1.5px solid light-dark(#aab8ad,#68796d); border-radius:5px; margin:1px 0 0; flex:none; cursor:pointer; background:transparent; }
+.task input:checked { background:var(--green); border-color:var(--green); position:relative; }
+.task input:checked:after { content:"✓"; color:white; position:absolute; font-size:12px; font-weight:800; left:2px; top:-1px; }
+.task-text { font-size:12px; line-height:1.5; color:var(--text); }
+.task.done .task-text { color:var(--muted); text-decoration:line-through; }
+.empty { display:none; background:var(--surface); border:1px dashed var(--border); border-radius:14px; text-align:center; color:var(--muted); padding:30px; grid-column:1/-1; font-size:13px; }
+.note { margin-top:18px; padding:15px 17px; border-radius:13px; background:var(--amber-soft); color:var(--text); font-size:12px; line-height:1.6; }
+.note strong { color:var(--amber); }
+.footer { text-align:center; color:var(--muted); font-size:11px; padding:20px 0 0; }
+@media (max-width:720px) { .summary { grid-template-columns:1fr 1fr; } .progress-panel { grid-column:1/-1; } .categories { grid-template-columns:1fr; } h1 { font-size:28px; } main { padding-left:14px; padding-right:14px; } .toolbar { align-items:stretch; } .filters { order:3; width:100%; justify-content:space-between; } .filter { flex:1; } }
+@media (prefers-reduced-motion:reduce) { * { transition:none !important; } }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header class="hero">
+    <div class="eyebrow">Arafa Hijab · Project checklist</div>
+    <h1>Persiapan Konsinyasi<br>Toserba Selamat Joglo</h1>
+    <p>Dashboard pemantauan persiapan toko offline baru di Cianjur.</p>
+    <div class="hero-meta"><span class="pill">📍 Joglo, Cianjur</span><span class="pill">🗓 Target opening: Awal November 2026</span><span class="pill">📦 Batas stok awal: 100 produk</span></div>
+  </header>
+  <main>
+    <section class="summary" aria-label="Ringkasan progres">
+      <div class="panel progress-panel">
+        <div class="metric-label">PROGRES KESELURUHAN</div>
+        <div class="big-number" id="percent">0%</div>
+        <div class="track"><div class="fill" id="overallFill"></div></div>
+        <div class="progress-foot"><span id="doneCount">0 tugas selesai</span><span id="remainingCount">0 belum selesai</span></div>
+      </div>
+      <div class="panel"><div class="metric-label">SUDAH SELESAI</div><div class="metric-value" id="doneMetric">0</div><div class="metric-sub">Checklist dituntaskan</div></div>
+      <div class="panel"><div class="metric-label">BELUM SELESAI</div><div class="metric-value" id="todoMetric">0</div><div class="metric-sub">Perlu ditindaklanjuti</div></div>
+    </section>
+    <section class="toolbar" aria-label="Filter checklist">
+      <input class="search" id="search" type="search" placeholder="Cari tugas persiapan…" aria-label="Cari tugas">
+      <div class="filters"><button class="filter active" data-filter="all">Semua</button><button class="filter" data-filter="todo">Belum</button><button class="filter" data-filter="done">Selesai</button></div>
+      <button class="action" id="exportBtn">Unduh progres CSV</button>
+      <button class="action" id="printBtn">Cetak</button>
+    </section>
+    <div class="section-heading"><h2>Daftar persiapan</h2><span id="categoryCount">8 kategori</span></div>
+    <section class="categories" id="categories"></section>
+    <div class="empty" id="empty">Tidak ada tugas yang cocok dengan pencarian atau filter ini.</div>
+    <div class="note"><strong>Catatan penting:</strong> Checklist tersimpan otomatis di browser/perangkat ini. Jika dashboard dibuka oleh beberapa orang atau dari perangkat berbeda, centangannya belum tersinkronisasi bersama. Untuk progres tim secara real-time, dashboard perlu dihubungkan ke Google Sheets atau database bersama.</div>
+    <div class="footer">Arafa Hijab · Checklist internal persiapan konsinyasi</div>
+  </main>
+</div>
+<script>
+const sections = [
+ {title:"Produk & Stok",icon:"📦",tasks:["Menentukan artikel/jenis produk yang akan dititipkan","Menentukan varian, ukuran, dan warna produk","Menentukan jumlah stok setiap artikel/warna","Memastikan total stok awal maksimal 100 pcs","Quality control seluruh produk sebelum dikirim","Memastikan produk sudah dilipat dan dikemas dengan rapi","Memberikan label harga pada setiap produk","Membuat daftar rincian produk dan jumlah stok awal","Menyiapkan dokumen serah terima stok"]},
+ {title:"Display & Perlengkapan Toko",icon:"🛍️",tasks:["Stand hanger / stand gawang","Hanger khusus kerudung","Stand banner dan banner Arafa Hijab","Katalog produk untuk hanger (bentuk menyesuaikan stand hanger)","Sign Arafa Hijab ukuran A5","Label harga / price tag","Identitas kategori atau jenis produk","Perlengkapan tambahan untuk merapikan display","Memastikan seluruh perlengkapan siap dibawa dan dipasang"]},
+ {title:"Konsep & Promo Opening",icon:"🎉",tasks:["Menentukan konsep promo spesial opening","Menentukan periode promo","Menentukan mekanisme promo dan syarat ketentuan","Menentukan produk yang masuk program promo","Menentukan harga jual dan kesesuaian harga dengan channel lain","Menyiapkan materi komunikasi promo","Koordinasi persetujuan promo dengan direksi"]},
+ {title:"Administrasi & Sistem Arafa Hub",icon:"🖥️",tasks:["Menambahkan Toserba Selamat Joglo Cianjur sebagai toko offline baru di Arafa Hub","Melengkapi informasi toko dan lokasi","Mengatur akses admin/PIC toko jika diperlukan","Menginput stok awal maksimal 100 pcs","Memastikan stok masuk sesuai berita acara serah terima","Memastikan transaksi penjualan dapat diinput","Memastikan laporan stok masuk, stok keluar, dan stok tersisa dapat dipantau","Menentukan mekanisme pelaporan penjualan dan rekonsiliasi stok"]},
+ {title:"Broadcast Customer Cianjur",icon:"💬",tasks:["Mengumpulkan database customer berdomisili Cianjur","Memfilter customer yang berpotensi melakukan pembelian ulang","Menyiapkan copywriting broadcast","Menyiapkan desain atau materi visual broadcast","Menyertakan informasi lokasi Toserba Selamat Joglo Cianjur","Menyertakan informasi produk dan promo opening","Menentukan jadwal pengiriman broadcast","Menyiapkan follow-up untuk customer yang merespons"]},
+ {title:"Konten & Awareness",icon:"📸",tasks:["Menentukan tanggal pasti pengiriman produk ke toko","Koordinasi jadwal kunjungan dengan tim creative","Menyiapkan konsep konten announcing new offline store","Menyiapkan materi foto/video produk di lokasi","Membuat konten proses persiapan dan pemasangan display","Membuat konten informasi lokasi pembelian offline","Menyiapkan konten promo opening","Menentukan jadwal publikasi konten di media sosial","Menyiapkan dokumentasi hari pertama opening"]},
+ {title:"Pengiriman & Operasional",icon:"🚚",tasks:["Menentukan tanggal dan jam pengiriman produk","Menentukan PIC pengiriman","Menentukan PIC Arafa Hijab untuk koordinasi dengan pihak toko","Memastikan lokasi dan area display yang diberikan toko","Memastikan ketentuan kerja sama konsinyasi tertulis dan disepakati","Memastikan mekanisme pencatatan produk terjual dan retur","Menentukan jadwal pengecekan stok berkala","Menentukan prosedur pengisian ulang stok","Memastikan seluruh perlengkapan display terpasang dengan baik"]},
+ {title:"Evaluasi & Monitoring",icon:"📊",tasks:["Menentukan target penjualan awal","Menentukan periode evaluasi penjualan","Membuat format monitoring stok dan penjualan","Memantau produk/warna yang paling diminati","Memantau produk yang kurang bergerak","Mengevaluasi efektivitas promo opening","Menentukan keputusan restock berdasarkan hasil penjualan","Membuat laporan evaluasi awal konsinyasi"]}
+];
+const storageKey = "arafa-joglo-checklist-v1";
+let state = {};
+try { state = JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch(e) { state = {}; }
+let activeFilter = "all";
+const allTasks = sections.flatMap((s,si)=>s.tasks.map((task,ti)=>({key:`${si}-${ti}`,section:s.title,task})));
+const $ = id => document.getElementById(id);
+function save(){ try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch(e) {} }
+function render(){
+ const query = $("search").value.trim().toLowerCase();
+ let visibleCount = 0;
+ const root = $("categories"); root.innerHTML = "";
+ sections.forEach((section,si)=>{
+   const taskRows = section.tasks.map((task,ti)=>({task,key:`${si}-${ti}`,done:!!state[`${si}-${ti}`]}));
+   const shown = taskRows.filter(x=>(activeFilter==="all" || (activeFilter==="done" ? x.done : !x.done)) && x.task.toLowerCase().includes(query));
+   if(!shown.length) return;
+   visibleCount += shown.length;
+   const complete = taskRows.filter(x=>x.done).length;
+   const card = document.createElement("article"); card.className="category";
+   const head = document.createElement("div"); head.className="category-head";
+   head.innerHTML = `<div class="cat-icon">${section.icon}</div><div class="cat-title">${section.title}</div><div class="cat-count">${complete}/${taskRows.length}</div>`;
+   const track = document.createElement("div"); track.className="cat-track"; track.innerHTML=`<div style="width:${complete/taskRows.length*100}%"></div>`;
+   const items = document.createElement("div"); items.className="items";
+   shown.forEach(item=>{
+     const label = document.createElement("label"); label.className=`task${item.done?" done":""}`;
+     const input = document.createElement("input"); input.type="checkbox"; input.checked=item.done; input.setAttribute("aria-label",item.task);
+     input.addEventListener("change",()=>{state[item.key]=input.checked; save(); render();});
+     const span = document.createElement("span"); span.className="task-text"; span.textContent=item.task;
+     label.append(input,span); items.append(label);
+   });
+   card.append(head,track,items); root.append(card);
+ });
+ $("empty").style.display = visibleCount ? "none" : "block";
+ const total=allTasks.length, done=allTasks.filter(x=>!!state[x.key]).length, todo=total-done, pct=Math.round(done/total*100);
+ $("percent").textContent=pct+"%"; $("overallFill").style.width=pct+"%";
+ $("doneCount").textContent=done+" dari "+total+" tugas selesai"; $("remainingCount").textContent=todo+" belum selesai";
+ $("doneMetric").textContent=done; $("todoMetric").textContent=todo;
+ $("categoryCount").textContent=sections.length+" kategori · "+visibleCount+" tugas ditampilkan";
+}
+document.querySelectorAll(".filter").forEach(btn=>btn.addEventListener("click",()=>{activeFilter=btn.dataset.filter;document.querySelectorAll(".filter").forEach(b=>b.classList.toggle("active",b===btn));render();}));
+$("search").addEventListener("input",render);
+$("printBtn").addEventListener("click",()=>window.print());
+$("exportBtn").addEventListener("click",()=>{
+ const rows=[["Kategori","Tugas","Status"],...allTasks.map(x=>[x.section,x.task,state[x.key]?"Selesai":"Belum selesai"])];
+ const csv=rows.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(",")).join("\r\n");
+ const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"}); const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download="progres-konsinyasi-joglo.csv"; a.click(); URL.revokeObjectURL(url);
+});
+render();
+</script>
+<style>
+@media print { body,.app { background:#fff !important; color:#111 !important; } .hero { background:#244c3c !important; print-color-adjust:exact; } .toolbar,.note,.footer { display:none !important; } main { max-width:none; padding:12px; } .categories { grid-template-columns:1fr 1fr; } .category,.panel { break-inside:avoid; box-shadow:none; } }
+</style>
+</body>
+</html>
